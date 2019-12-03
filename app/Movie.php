@@ -7,4 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Movie extends Model
 {
     protected $guarded = [];
+
+    public static function search($searchTerm)
+    {
+       return Movie::where('title', 'LIKE', '%'.$searchTerm.'%')
+                    ->orderBy('title')
+                    ->get();
+    }
 }
