@@ -16,10 +16,17 @@ class MovieController extends Controller
     public function index(Request $request)
     {   
         $searchTerm = $request->query('title');
+        $skip = $request->query('skip'); //vraca value ?title = value
+        $take = $request->query('take');
 
         if($searchTerm){
+
+            return Movie::search($searchTerm, $take);
+        }
+
+        if($skip && $take) {
             
-            return Movie::search($searchTerm);
+            return Movie::skip($skip)->take($take)->get();
         }
 
         return Movie::all();

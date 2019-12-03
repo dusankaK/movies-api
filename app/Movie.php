@@ -8,10 +8,11 @@ class Movie extends Model
 {
     protected $guarded = [];
 
-    public static function search($searchTerm)
+    public static function search($searchTerm, $take)
     {
        return Movie::where('title', 'LIKE', '%'.$searchTerm.'%')
                     ->orderBy('title')
+                    ->take($take)
                     ->get();
     }
 }
